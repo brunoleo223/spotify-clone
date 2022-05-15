@@ -1,9 +1,9 @@
-import type { NextPage } from 'next'
+import type { NextPage } from 'next';
 import Sidebar from '../components/Sidebar'
 
 const Home: NextPage = () => {
   return (
-    <div className="">
+    <div className="bg-black h-screen overflow-hidden">
       <main>
         <Sidebar />
         {/* Content */}
