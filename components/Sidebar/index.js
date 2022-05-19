@@ -4,13 +4,21 @@ import {
   LibraryIcon,
   PlusCircleIcon,
   HeartIcon,
-  RssIcon
-} from '@heroicons/react/outline'
+  RssIcon,
+  LogoutIcon
+} from '@heroicons/react/outline';
+import { signOut } from "next-auth/react";
 
 function Sidebar() {
   return (
     <div className='text-gray-500 p-5 text-sm border-r border-gray-900'>
       <div className='space-y-4'>
+        <button onClick={() => signOut()} className='flex gap-2 items-center hover:text-white transition-all'>
+          <LogoutIcon className='h-5 w-5' />
+          <p>Logout</p>
+        </button>
+
+
         <button className='flex gap-2 items-center hover:text-white transition-all'>
           <HomeIcon className='h-5 w-5' />
           <p>Home</p>
