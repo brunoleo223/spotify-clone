@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { shuffle } from 'lodash';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {playlistIdState, playlistState} from '../../atoms/playlistAtom';
+import useSpotify from '../../hooks/useSpotify';
 
 const colors = [
     "from-indigo-500",
@@ -16,14 +17,25 @@ const colors = [
 ]
 
 function Center() {
+    const spotifyApi = useSpotify();
     const { data: session } = useSession();
     const [color, setColor] = useState(null)
     const playlistID = useRecoilValue(playlistIdState);
     const [playlist, setPlaylist] = useRecoilState(playlistState);
 
+    // shuffle a color to the header
     useEffect(() => {
         setColor(shuffle(colors).pop());
     }, [playlistID]);
+
+    // get playlist data based on the playlist id from recoil state 
+    useEffect(() => {
+        if(spotifyApi.getAccessToken()){
+            spotifyApi.getPlaylist(playlistID).then((data) => {
+                setPlaylist(data.body)
+            }).catch((err) => console.log('Something went error!', err))
+        }
+    }, [spotifyApi, playlistID])
 
     return (
         <div className='flex-grow text-white'>
@@ -40,7 +52,11 @@ function Center() {
             </header>
 
             <section className={`flex items-end spance-x-7 bg-gradient-to-b to-black ${color} h-80 text-white p-8 w-full`}>
-                hello
+                <img src={playlist?.images?.[0].url} className="h-44 w-44 shadow-2xl mr-5"/>
+                <div>
+                    <p>PLAYLIST</p>
+                    <h1 className='text-2xl md:text-3xl xl:text-5xl font-bold'>{playlist?.name}</h1>
+                </div>
             </section>
         </div>
     )
