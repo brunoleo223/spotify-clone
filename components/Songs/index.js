@@ -3,15 +3,15 @@ import { playlistState } from '../../atoms/playlistAtom';
 
 function Songs() {
   const playlist = useRecoilValue(playlistState);
-  {console.log(playlist?.tracks.items)}
 
   return (
     <div className="text-white">
-      {playlist?.tracks.items.map((track) => {
+      {playlist?.tracks.items.map((track) => (
         <div>
           {track.track.name}
         </div>
-      })}
+      ))}
+
     </div>
   )
 }
