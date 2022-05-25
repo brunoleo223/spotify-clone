@@ -4,10 +4,9 @@ import {
   LibraryIcon,
   PlusCircleIcon,
   HeartIcon,
-  RssIcon,
-  LogoutIcon
+  RssIcon
 } from '@heroicons/react/outline';
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import useSpotify from '../../hooks/useSpotify';
@@ -29,12 +28,8 @@ function Sidebar() {
   }, [session, spotifyApi])
 
   return (
-    <div className='text-gray-500 p-5 text-xs border-r border-gray-900 overflow-y-scroll h-screen scrollbar-hide lg:text-sm sm:max-w-[12rem] lg:max-w-[15rem] hidden md:inline-flex'>
+    <div className='text-gray-500 p-5 text-xs border-r border-gray-900 overflow-y-scroll h-screen scrollbar-hide lg:text-sm sm:max-w-[12rem] lg:max-w-[15rem] hidden md:inline-flex pb-36'>
       <div className='space-y-4'>
-        <button onClick={() => signOut()} className='flex gap-2 items-center hover:text-white transition-all'>
-          <LogoutIcon className='h-5 w-5' />
-          <p>Logout</p>
-        </button>
 
 
         <button className='flex gap-2 items-center hover:text-white transition-all'>
